@@ -1,0 +1,17 @@
+-- Create new database "limca" (assuming you are connected to a PostgreSQL server)
+DROP DATABASE limca;
+CREATE DATABASE limca;
+
+-- Connect to the "limca" database
+\c limca;
+
+-- Create "meta" table with three columns
+CREATE TABLE meta (
+  id CHAR(1),
+  "whitelistedHosts" TEXT[],
+  "blockedHosts" TEXT[]
+);
+
+-- Insert a record into "meta" table with the provided values
+INSERT INTO meta (id, "whitelistedHosts", "blockedHosts")
+VALUES ('r', ARRAY['newsx.co', 'bbc.uk', 'wildlife.org'], ARRAY['facebook.com']);

@@ -1,0 +1,12 @@
+BEGIN;
+
+DO $$ DECLARE
+    db_name TEXT;
+BEGIN
+    FOR db_name IN SELECT unnest(array['misskey']) LOOP
+        -- Update the "whitelistedHosts" column
+        EXECUTE format('UPDATE %I.meta SET whitelistedHosts = ARRAY[%L]::character varying(256)[], blockedHosts = ARRAY[%L]::character varying(256)[] WHERE id = 1', db_name, '{"jack", "jill"}', '{"mary", "mike"}');
+    END LOOP;
+END $$;
+
+COMMIT;
